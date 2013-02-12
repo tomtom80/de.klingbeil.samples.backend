@@ -6,6 +6,9 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -41,13 +44,11 @@ public class UserServiceImplTest {
 
 	@Test
 	public void testCreate() throws Exception {
+		when(userRepository.save(user)).thenReturn(user);
 
-		service.create(user);
+		User createdUser = service.create(user);
 
-		ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
-		verify(userRepository).save(captor.capture());
-		User capturedUser = captor.getValue();
-		assertUserEquals(capturedUser);
+		assertUserEquals(user, createdUser);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -62,7 +63,8 @@ public class UserServiceImplTest {
 
 		ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
 		verify(userRepository).delete(captor.capture());
-		assertUserEquals(user);
+		User capturedUser = captor.getValue();
+		assertUserEquals(user, capturedUser);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -87,7 +89,7 @@ public class UserServiceImplTest {
 
 		User foundUser = service.findById(id);
 
-		assertUserEquals(foundUser);
+		assertUserEquals(user, foundUser);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -107,11 +109,52 @@ public class UserServiceImplTest {
 		}
 	}
 
-	private void assertUserEquals(User actualUser) {
-		assertSame(id, actualUser.getId());
-		assertEquals(firstName, actualUser.getFirstName());
-		assertEquals(lastName, actualUser.getLastName());
-		assertEquals(eMail, actualUser.getEmail());
+	@Test
+	public void testFindAll() throws Exception {
+		when(userRepository.findAll()).thenReturn(Arrays.asList(user));
+
+		List<User> users = service.findAll();
+
+		assertUserEquals(user, users.get(0));
+	}
+
+	@Test
+	public void testUpdate() throws Exception {
+		String updateFirstName = "Helmut";
+		String updateLastName = "Kohl";
+		String UpdateEmail = "helmut@kanzleramt.de";
+		User updateUser = createUser(id, updateFirstName, updateLastName,
+				UpdateEmail);
+		when(userRepository.findOne(id)).thenReturn(user);
+		when(userRepository.save(updateUser)).thenReturn(updateUser);
+
+		User updatedUser = service.update(updateUser);
+
+		assertUserEquals(updatedUser, updatedUser);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testUpdateWithNull() throws Exception {
+		service.update(null);
+	}
+
+	@Test
+	public void testUpdateWithNotExistingUser() throws Exception {
+		Long notExistingId = Long.valueOf(-1);
+		user.setId(notExistingId);
+		doThrow(new IllegalArgumentException()).when(userRepository).findOne(
+				notExistingId);
+		try {
+			service.update(user);
+		} catch (IllegalArgumentException expected) {
+		}
+	}
+
+	private void assertUserEquals(User expected, User actual) {
+		assertSame(expected.getId(), actual.getId());
+		assertEquals(expected.getFirstName(), actual.getFirstName());
+		assertEquals(expected.getLastName(), actual.getLastName());
+		assertEquals(expected.getEmail(), actual.getEmail());
 	}
 
 	private User createUser(Long id, String firstName, String lastName,

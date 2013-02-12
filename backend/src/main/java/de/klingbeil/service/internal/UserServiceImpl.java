@@ -38,8 +38,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findAll();
 	}
 
 	@Override
@@ -51,8 +50,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User update(User updatedUser) {
-		// TODO Auto-generated method stub
-		return null;
+		Assert.notNull(updatedUser, "user must not be null");
+
+		checkUserExists(updatedUser);
+		return userRepository.save(updatedUser);
+	}
+
+	private void checkUserExists(User updatedUser) {
+		userRepository.findOne(updatedUser.getId());
 	}
 
 }
