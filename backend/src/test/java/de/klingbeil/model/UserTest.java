@@ -6,40 +6,61 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class UserTest {
-	
+
 	private User user;
+	private String firstName;
+	private Long id;
+	private String lastName;
+	private String eMail;
+	private Long version;
 
 	@Before
 	public void setUp() {
 		user = new User();
+		id = Long.valueOf(324);
+		firstName = "Hans";
+		lastName = "Wurst";
+		eMail = "tom@klingbeil.de";
 	}
-	
+
+	@Test
+	public void testId() throws Exception {
+
+		user.setId(id);
+
+		assertEquals(id, user.getId());
+	}
+
+	@Test
+	public void testVersion() throws Exception {
+
+		user.setVersion(version);
+
+		assertEquals(version, user.getVersion());
+	}
+
 	@Test
 	public void testFirstName() {
-		String firstName = "Hans";
-		
-		user.setFirstName( firstName );
-		
-		assertEquals( firstName, user.getFirstName());
+
+		user.setFirstName(firstName);
+
+		assertEquals(firstName, user.getFirstName());
 	}
 
 	@Test
 	public void testLastName() throws Exception {
-		String lastName = "Wurst";
-		
-		user.setLastName( lastName);
-		
-		assertEquals( lastName , user.getLastName());
-	}
-	
-	@Test
-	public void testEmail() throws Exception {
-		String eMail = "tom@klingbeil.de";
-		
-		user.setEmail( eMail);
-		
-		assertEquals( eMail, user.getEmail());
+
+		user.setLastName(lastName);
+
+		assertEquals(lastName, user.getLastName());
 	}
 
-	
+	@Test
+	public void testEmail() throws Exception {
+
+		user.setEmail(eMail);
+
+		assertEquals(eMail, user.getEmail());
+	}
+
 }
