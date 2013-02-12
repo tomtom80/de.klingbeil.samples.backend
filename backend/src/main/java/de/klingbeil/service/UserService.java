@@ -21,12 +21,12 @@ public interface UserService {
 	/**
 	 * Deletes a user.
 	 * 
-	 * @param userId
+	 * @param id
 	 *            The id of the user to delete.
 	 * @throws IllegalArgumentException
 	 *             if user with userId not found
 	 */
-	public void delete(Long userId);
+	public void delete(Long id);
 
 	/**
 	 * Finds all users.
@@ -50,7 +50,7 @@ public interface UserService {
 	 * Updates the information of a user.
 	 * 
 	 * @param updatedUser
-	 *            The information of the updated user.
+	 *            user with updated information.
 	 * @return The updated user.
 	 */
 	public User update(User updatedUser);
