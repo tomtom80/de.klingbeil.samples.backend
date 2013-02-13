@@ -1,8 +1,8 @@
-package de.klingbeil.service;
+package de.klingbeil.backend.service;
 
 import java.util.List;
 
-import de.klingbeil.model.User;
+import de.klingbeil.backend.model.User;
 
 /**
  * Declares methods used to obtain and modify user information.

@@ -1,4 +1,4 @@
-package de.klingbeil.service.internal;
+package de.klingbeil.backend.service.internal;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -15,8 +15,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import de.klingbeil.model.User;
-import de.klingbeil.repository.UserRepository;
+import de.klingbeil.backend.model.User;
+import de.klingbeil.backend.repository.UserRepository;
+import de.klingbeil.backend.service.internal.UserServiceImpl;
 
 public class UserServiceImplTest {
 

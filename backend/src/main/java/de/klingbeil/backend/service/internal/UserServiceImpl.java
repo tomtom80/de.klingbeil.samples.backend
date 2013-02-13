@@ -1,4 +1,4 @@
-package de.klingbeil.service.internal;
+package de.klingbeil.backend.service.internal;
 
 import java.util.List;
 
@@ -6,12 +6,14 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import de.klingbeil.model.User;
-import de.klingbeil.repository.UserRepository;
-import de.klingbeil.service.UserService;
+import de.klingbeil.backend.model.User;
+import de.klingbeil.backend.repository.UserRepository;
+import de.klingbeil.backend.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	private static final Logger LOGGER = LoggerFactory

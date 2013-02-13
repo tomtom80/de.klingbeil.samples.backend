@@ -1,9 +1,11 @@
-package de.klingbeil.model;
+package de.klingbeil.backend.model;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import de.klingbeil.backend.model.User;
 
 public class UserTest {
 
