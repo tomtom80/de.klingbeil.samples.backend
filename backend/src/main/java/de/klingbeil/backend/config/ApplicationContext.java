@@ -43,6 +43,7 @@ public class ApplicationContext {
 
 	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
 	private static final String PROPERTY_NAME_HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
+	private static final String PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
 	private static final String PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY = "hibernate.ejb.naming_strategy";
 	private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
 	private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
@@ -97,6 +98,8 @@ public class ApplicationContext {
 				.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
 		jpaProterties.put(PROPERTY_NAME_HIBERNATE_FORMAT_SQL, environment
 				.getRequiredProperty(PROPERTY_NAME_HIBERNATE_FORMAT_SQL));
+		jpaProterties.put(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO, environment
+				.getRequiredProperty(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO));
 		jpaProterties.put(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY, environment
 				.getRequiredProperty(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY));
 		jpaProterties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, environment

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import de.klingbeil.backend.model.User;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService {
 	@Resource
 	UserRepository userRepository;
 
+	@Transactional
 	@Override
 	public User create(User user) {
 		Assert.notNull(user, "user must not be null");
@@ -29,6 +31,7 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(user);
 	}
 
+	@Transactional
 	@Override
 	public void delete(Long id) {
 		Assert.notNull(id, "id must not be null");
@@ -50,6 +53,7 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findOne(id);
 	}
 
+	@Transactional
 	@Override
 	public User update(User updatedUser) {
 		Assert.notNull(updatedUser, "user must not be null");
