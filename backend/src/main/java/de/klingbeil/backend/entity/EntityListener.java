@@ -8,15 +8,22 @@ import org.springframework.context.ApplicationContext;
 
 import de.klingbeil.backend.spring.ApplicationContextProvider;
 
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class EntityListener {
 
 	@PrePersist
-	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void prePersist(Object entity) {
 		Collection<PrePersistCallback> registeredCallbacks = getRegisteredCallbacks(PrePersistCallback.class);
 		for (PrePersistCallback callback : registeredCallbacks) {
-			callback.prePersist(entity);
+			if (entityTypeMatches(entity, callback)) {
+				callback.prePersist(entity);
+			}
 		}
+	}
+
+	private static boolean entityTypeMatches(Object entity,
+			EntityCallback callback) {
+		return callback.getEntityType().isAssignableFrom(entity.getClass());
 	}
 
 	private static <T> Collection<T> getRegisteredCallbacks(

@@ -1,5 +1,6 @@
 package de.klingbeil.backend.entity;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import de.klingbeil.backend.config.ApplicationContextAware;
 import de.klingbeil.backend.config.ApplicationContextBackendTest;
+import de.klingbeil.backend.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ApplicationContextBackendTest.class,
@@ -32,6 +34,20 @@ public class EntityListenerTest {
 		listener.prePersist(new TestEntity());
 
 		assertTrue(testCallback.isCalled());
+	}
+
+	@Test
+	public void testPrePersistCallbackWithSubEntity() {
+		listener.prePersist(new TestEntitySubClass());
+
+		assertTrue(testCallback.isCalled());
+	}
+
+	@Test
+	public void testPrePersistCallbackWithNotMatchingEntityType() {
+		listener.prePersist(new User());
+
+		assertFalse(testCallback.isCalled());
 	}
 
 }
