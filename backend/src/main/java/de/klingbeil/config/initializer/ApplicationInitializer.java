@@ -1,4 +1,4 @@
-package de.klingbeil.backend.config;
+package de.klingbeil.config.initializer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,6 +9,8 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import de.klingbeil.config.context.ApplicationContextUi;
+
 public class ApplicationInitializer implements WebApplicationInitializer {
 	private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
 	private static final String DISPATCHER_SERVLET_MAPPING = "/";
@@ -17,7 +19,7 @@ public class ApplicationInitializer implements WebApplicationInitializer {
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.register(ApplicationContextBackend.class);
+		rootContext.register(ApplicationContextUi.class);
 
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet(
 				DISPATCHER_SERVLET_NAME, new DispatcherServlet(rootContext));

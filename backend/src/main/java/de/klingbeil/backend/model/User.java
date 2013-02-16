@@ -1,15 +1,21 @@
 package de.klingbeil.backend.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import de.klingbeil.backend.entity.EntityListener;
+
 @Entity
 @Table(name = "users")
+@EntityListeners(EntityListener.class)
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,6 +28,8 @@ public class User {
 	private String lastName;
 	@Column(name = "email", nullable = false)
 	private String eMail;
+	@Column(name = "creation_time", nullable = false)
+	private Date creationTime;
 
 	public void setId(Long id) {
 		this.id = id;
@@ -63,6 +71,14 @@ public class User {
 		return eMail;
 	}
 
+	public void setCreationTime(Date creationTime) {
+		this.creationTime = creationTime;
+	}
+
+	public Date getCreationTime() {
+		return creationTime;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -71,6 +87,7 @@ public class User {
 		builder.append(" firstName=" + firstName);
 		builder.append(" lastName=" + lastName);
 		builder.append(" eMail=" + eMail);
+		builder.append(" creationTime=" + creationTime);
 		return builder.toString();
 	}
 

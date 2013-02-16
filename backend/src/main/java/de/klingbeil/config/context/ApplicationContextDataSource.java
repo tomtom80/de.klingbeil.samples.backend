@@ -1,4 +1,4 @@
-package de.klingbeil.backend.config;
+package de.klingbeil.config.context;
 
 import java.util.Properties;
 

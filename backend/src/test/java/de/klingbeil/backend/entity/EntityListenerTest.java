@@ -11,13 +11,11 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import de.klingbeil.backend.config.ApplicationContextAware;
-import de.klingbeil.backend.config.ApplicationContextBackendTest;
 import de.klingbeil.backend.model.User;
+import de.klingbeil.config.context.ApplicationContextBackend;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ApplicationContextBackendTest.class,
-		ApplicationContextAware.class})
+@ContextConfiguration(classes = {ApplicationContextBackend.class})
 public class EntityListenerTest {
 
 	private EntityListener listener;

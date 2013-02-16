@@ -2,10 +2,10 @@ package de.klingbeil.backend.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import de.klingbeil.backend.model.User;
 
 public class UserTest {
 
@@ -65,4 +65,12 @@ public class UserTest {
 		assertEquals(eMail, user.getEmail());
 	}
 
+	@Test
+	public void testCreationTime() {
+		Date creationTime = new Date();
+
+		user.setCreationTime(creationTime);
+
+		assertEquals(creationTime, user.getCreationTime());
+	}
 }

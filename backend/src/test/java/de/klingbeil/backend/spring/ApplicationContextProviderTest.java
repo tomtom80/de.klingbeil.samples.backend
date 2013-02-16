@@ -7,10 +7,10 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import de.klingbeil.backend.config.ApplicationContextAware;
+import de.klingbeil.config.context.ApplicationContextBackend;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ApplicationContextAware.class})
+@ContextConfiguration(classes = {ApplicationContextBackend.class})
 public class ApplicationContextProviderTest {
 
 	@Test
