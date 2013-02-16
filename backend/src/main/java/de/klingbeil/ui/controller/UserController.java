@@ -200,7 +200,7 @@ public class UserController extends AbstractController {
 	 * 
 	 * @param userService
 	 */
-	protected void setuserService(UserService userService) {
+	protected void setUserService(UserService userService) {
 		this.userService = userService;
 	}
 }
