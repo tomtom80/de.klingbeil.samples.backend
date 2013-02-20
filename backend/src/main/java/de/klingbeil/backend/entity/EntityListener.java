@@ -3,6 +3,7 @@ package de.klingbeil.backend.entity;
 import java.util.Collection;
 
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 import org.springframework.context.ApplicationContext;
 
@@ -17,6 +18,16 @@ public class EntityListener {
 		for (PrePersistCallback callback : registeredCallbacks) {
 			if (entityTypeMatches(entity, callback)) {
 				callback.prePersist(entity);
+			}
+		}
+	}
+
+	@PreUpdate
+	public void preUpdate(Object entity) {
+		Collection<PreUpdateCallback> registeredCallbacks = getRegisteredCallbacks(PreUpdateCallback.class);
+		for (PreUpdateCallback callback : registeredCallbacks) {
+			if (entityTypeMatches(entity, callback)) {
+				callback.preUpdate(entity);
 			}
 		}
 	}

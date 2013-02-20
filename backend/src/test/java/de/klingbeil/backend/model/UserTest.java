@@ -73,4 +73,13 @@ public class UserTest {
 
 		assertEquals(creationTime, user.getCreationTime());
 	}
+
+	@Test
+	public void testModificationTime() throws Exception {
+		Date modificationTime = new Date();
+
+		user.setModificationTime(modificationTime);
+
+		assertEquals(modificationTime, user.getModificationTime());
+	}
 }

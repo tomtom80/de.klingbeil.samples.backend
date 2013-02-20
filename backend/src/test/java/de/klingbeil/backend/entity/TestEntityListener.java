@@ -3,21 +3,16 @@ package de.klingbeil.backend.entity;
 import javax.persistence.PrePersist;
 
 public class TestEntityListener {
-  
-  private static boolean prePersist;
-  private static Object lastPassedEntity;
 
-  @PrePersist
-  public void prePersist( Object entity ) {
-    prePersist = true;
-    lastPassedEntity = entity;
-  }
+	private static boolean prePersist;
 
-  public static boolean isPrePersist() {
-    return prePersist;
-  }
+	@PrePersist
+	public void prePersist(Object entity) {
+		prePersist = true;
+	}
 
-  public static Object getLastPassedEntity() {
-    return lastPassedEntity;
-  }
+	public static boolean isPrePersist() {
+		return prePersist;
+	}
+
 }

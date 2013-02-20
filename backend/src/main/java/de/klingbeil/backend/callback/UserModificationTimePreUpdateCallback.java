@@ -4,13 +4,13 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
-import de.klingbeil.backend.entity.PrePersistCallback;
+import de.klingbeil.backend.entity.PreUpdateCallback;
 import de.klingbeil.backend.model.User;
 
 @Component
-public class UserCreationTimePrePersistCallback
+public class UserModificationTimePreUpdateCallback
 		implements
-			PrePersistCallback<User> {
+			PreUpdateCallback<User> {
 
 	@Override
 	public Class<User> getEntityType() {
@@ -18,10 +18,8 @@ public class UserCreationTimePrePersistCallback
 	}
 
 	@Override
-	public void prePersist(User user) {
-		Date now = new Date();
-		user.setCreationTime(now);
-		user.setModificationTime(now);
+	public void preUpdate(User user) {
+		user.setModificationTime(new Date());
 	}
 
 }

@@ -2,6 +2,7 @@ package de.klingbeil.backend.service.internal;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -43,6 +44,28 @@ public class UserServiceIntegrationTest {
 
 		assertEquals(email, user.getEmail());
 		assertNotNull(user.getCreationTime().getTime());
+	}
+
+	@Test
+	public void testUpdate() throws Exception {
+		String email = "foo@bar.com";
+		String firstName = "Fred";
+		String newFirstName = "Wilma";
+		String lastName = "Feuerstein";
+		User user = createValidUser(email, firstName, lastName);
+		User createdUser = userService.create(user);
+		createdUser.setFirstName(newFirstName);
+
+		userService.update(createdUser);
+		entityManager.flush();
+
+		User updatedUser = userService.findById(createdUser.getId());
+		assertNotNull(updatedUser.getModificationTime());
+		assertTrue(
+				"Modification date must be after creation date",
+				updatedUser.getModificationTime().compareTo(
+						updatedUser.getCreationTime()) > 0);
+		assertEquals(newFirstName, updatedUser.getFirstName());
 	}
 
 	private static User createValidUser(String email, String firstName,

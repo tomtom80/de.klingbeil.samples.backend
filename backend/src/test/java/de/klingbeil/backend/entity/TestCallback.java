@@ -3,7 +3,10 @@ package de.klingbeil.backend.entity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TestCallback implements PrePersistCallback<TestEntity> {
+public class TestCallback
+		implements
+			PrePersistCallback<TestEntity>,
+			PreUpdateCallback<TestEntity> {
 	private boolean isCalled;
 
 	@Override
@@ -13,6 +16,11 @@ public class TestCallback implements PrePersistCallback<TestEntity> {
 
 	@Override
 	public void prePersist(TestEntity entity) {
+		isCalled = true;
+	}
+
+	@Override
+	public void preUpdate(TestEntity entity) {
 		isCalled = true;
 	}
 

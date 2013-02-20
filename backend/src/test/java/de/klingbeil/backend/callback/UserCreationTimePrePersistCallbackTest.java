@@ -29,5 +29,6 @@ public class UserCreationTimePrePersistCallbackTest {
 		callback.prePersist(user);
 
 		assertNotNull(user.getCreationTime());
+		assertNotNull(user.getModificationTime());
 	}
 }

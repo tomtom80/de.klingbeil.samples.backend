@@ -30,6 +30,8 @@ public class User {
 	private String eMail;
 	@Column(name = "creation_time", nullable = false)
 	private Date creationTime;
+	@Column(name = "modification_time", nullable = false)
+	private Date modificationTime;
 
 	public void setId(Long id) {
 		this.id = id;
@@ -79,6 +81,14 @@ public class User {
 		return creationTime;
 	}
 
+	public void setModificationTime(Date modificationTime) {
+		this.modificationTime = modificationTime;
+	}
+
+	public Date getModificationTime() {
+		return modificationTime;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -88,6 +98,7 @@ public class User {
 		builder.append(" lastName=" + lastName);
 		builder.append(" eMail=" + eMail);
 		builder.append(" creationTime=" + creationTime);
+		builder.append(" modificationTime=" + modificationTime);
 		return builder.toString();
 	}
 
